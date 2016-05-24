@@ -8,6 +8,7 @@ $routeProvider.
 	when('/',{controller:'homeController', templateUrl:'home.html'}).
 	when('/ligas',{controller:'ligasController',templateUrl:'ligas.html'}).
     when('/login',{controller:'loginController',templateUrl:'login.html'}).
+	when('/times_liga/:slug',{controller:'times_ligaController',templateUrl:'times_liga.html'}).
 	otherwise({redirectTo:'/'});
 
 
@@ -20,6 +21,49 @@ app.controller('homeController', function ($scope,$http) {
 	
 	
 });
+
+app.controller('ligasController', function ($scope,$http,$localStorage) {
+	console.log('ligas');
+	
+		$http.get(
+			'https://api.cartolafc.globo.com/auth/ligas',
+			{
+				  headers:{
+					  'X-GLB-Token': $localStorage.token
+				  }
+						
+			}
+		).then(function(response){
+			$scope.ligas=response.data.ligas;
+			console.log(response.data.ligas);
+			
+		});
+	
+});
+	//https://api.cartolafc.globo.com/auth/liga/prodesp-coaching-smart
+app.controller('times_ligaController', function ($routeParams,$scope,$http,$localStorage,$routeParams) {
+	console.log('ligas');
+	
+		$http.get(
+			'https://api.cartolafc.globo.com/auth/liga/'+$routeParams.slug,
+			{
+				  headers:{
+					  'X-GLB-Token': $localStorage.token
+				  }
+						
+			}
+		).then(function(response){
+			$scope.times=response.data.times;
+			console.log($scope.times);
+			
+		});
+	
+});
+	
+	
+	
+
+
 
 app.controller('loginController', function ($scope,$http, $localStorage, $location, $rootScope) {
 	$scope.efetuaLogin= function(){

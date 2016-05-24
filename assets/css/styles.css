@@ -1,3 +1,19 @@
+.row{
+	padding-bottom: 14px;
+
+}
+
+.row .col-xs-10{
+	
+	border: solid 1px #BBB;
+	bord
+	-webkit-box-shadow: 3px 3px 8px 0px rgba(50, 50, 50, 0.22);
+	-moz-box-shadow:    3px 3px 8px 0px rgba(50, 50, 50, 0.22);
+	box-shadow:         3px 3px 8px 0px rgba(50, 50, 50, 0.22);
+
+}
+
+
 i{
   font-size:larger;
 }
