@@ -3,9 +3,21 @@
 
 
 
-	<div class="row">
-		<div class="col-xs-1">&nbsp;</div>
-		<div class="col-xs-10"><b>{{  time.nome  }}</b> 
+	<div class="row" >
+		<div class="col-xs-1" >&nbsp;</div>
+		<div class="col-xs-10" ng-init="times_selecionados[time.slug]=times_selecionados[time.slug] || false" ng-class="times_selecionados[time.slug] && 'bg-warning' " ng-dblclick="adicionaTimeNaLista(time.slug)"">
+			<div class="col-xs-1">&nbsp;</div>
+			<div class="col-xs-1">
+				<p class="pull-right"><img src="{{ time.url_escudo_png }}" height="48" width="48" /></p>
+			</div>
+			<div class="col-xs-7">
+				<b> {{  time.nome }}</b>
+				<br />
+				 {{ time.nome_cartola }}
+			</div>
+			<div class="col-xs-1">
+				<p class="pull-left">-28.41&nbsp;</p>
+			</div>
 		
 		</div>         
 	</div>
