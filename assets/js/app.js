@@ -5,7 +5,7 @@ underscore.factory('_', ['$window', function($window) {
 
 
 var app = angular.module('app',['ngRoute', 'ngStorage', 'underscore']);
-
+//https://api.cartolafc.globo.com/atletas/pontuados
 
 app.config(['$routeProvider',function($routeProvider, $location,$rootScope){
 	
@@ -22,8 +22,36 @@ $routeProvider.
 	
 }]);
 
-app.controller('homeController', function ($scope,$http, $localStorage) {
+app.controller('homeController', function ($scope,$http, $localStorage, _) {
 	$localStorage.times_selecionados= $localStorage.times_selecionados || [];
+	
+	$scope.atualizaPontuados=function(){
+		$http.get(
+			'https://api.cartolafc.globo.com/atletas/pontuados',
+			{
+				  headers:{
+					  'X-GLB-Token': $localStorage.token
+				  }
+						
+			}
+
+		).then(function(response){
+			console.log(response.data.atletas);
+			
+			$scope.atletas=response.data.atletas;
+			$scope.clubes=response.data.clubes;
+			$scope.posicoes=response.data.posicoes;
+		});
+		
+
+	};
+	
+	
+	//$scope.times_selecionados=$localStorage.times_selecionados;
+	_.each($localStorage.times_selecionados,function(time_slug){
+		
+		
+	})
 	
 	
 	

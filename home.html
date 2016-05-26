@@ -1,18 +1,26 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Bolao2</title>
-        <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-        <link rel="stylesheet" href="assets/css/styles.css">
-        <link rel="stylesheet" href="assets/css/Google-Style-Login.css">
-    </head>
-    <body>
-        <script src="assets/js/jquery.min.js"></script>
-        <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-        <script src="assets/js/angular.js"></script>
-        <script src="assets/js/angular-route.js"></script>
-        <script src="assets/js/app.js"></script>
-    </body>
-</html>
+
+<div ng-repeat="time in times_selecionados">
+
+
+
+	<div class="row" >
+		<div class="col-xs-1" >&nbsp;</div>
+		<div class="col-xs-10">
+			<div class="col-xs-1">&nbsp;</div>
+			<div class="col-xs-1">
+				<p class="pull-right"><img src="{{ time.url_escudo_png }}" height="48" width="48" /></p>
+			</div>
+			<div class="col-xs-7">
+				<b> {{  time.nome }}</b>
+				<br />
+				 {{ time.nome_cartola }}
+			</div>
+			<div class="col-xs-1">
+				<p class="pull-left">-28.41&nbsp;</p>
+			</div>
+		
+		</div>         
+	</div>
+	
+
+</div>
