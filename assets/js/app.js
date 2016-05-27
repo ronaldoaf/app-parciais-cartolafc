@@ -29,6 +29,64 @@ app.controller('mainController', function ($routeParams,$rootScope,$scope,$http,
 	$localStorage.times_selecionados= $localStorage.times_selecionados || [];
 	
 	
+	
+	$rootScope.atualizaJogadoresDoMercado=function(){
+		$http.get(
+			'https://api.cartolafc.globo.com/atletas/mercado',
+			{
+				  headers:{
+					  'X-GLB-Token': $localStorage.token
+				  }
+						
+			}
+
+		).then(function(response){
+			//console.log(response.data.atletas);
+			$rootScope.mercado=response.data;
+		},function(response){
+			console.log('Deu erro acessar o mercado');
+			console.log(response);
+		});
+	
+	}
+	
+	
+	
+	$rootScope.atualizaJogadoresPontuados=function(){
+		$http.get(
+			'https://api.cartolafc.globo.com/atletas/pontuados',
+			{
+				  headers:{
+					  'X-GLB-Token': $localStorage.token
+				  }
+						
+			}
+
+		).then(function(response){
+			//console.log(response.data.atletas);
+			$rootScope.pontuados=response.data;
+			$rootScope.parciais_ativas=true;
+			
+		},function(response){
+			if (response.status==404){
+				$rootScope.atualizaJogadoresDoMercado();
+				$rootScope.parciais_ativas=false;
+			}
+		});
+		
+
+	};
+	
+	
+	$rootScope.atualizaJogadoresPontuados();
+	
+	$rootScope.$watch('pontuados', function() {
+        $localStorage.pontuados=$rootScope.pontuados;
+    });
+	$rootScope.$watch('mercado', function() {
+        $localStorage.mercado=$rootScope.mercado;
+    });
+	
 
 });
 	
@@ -53,11 +111,16 @@ app.controller('mainController', function ($routeParams,$rootScope,$scope,$http,
 
 
 app.controller('homeController', function ($scope,$http, $localStorage, _) {
-	$localStorage.times_selecionados= $localStorage.times_selecionados || [];
+	//$localStorage.times_selecionados= $localStorage.times_selecionados || [];
+	$localStorage.times_home = $localStorage.times_home.push || [];
 	
-	$scope.atualizaPontuados=function(){
+	$scope.times_home = $localStorage.times_home;
+
+	$scope.getTime=function(time_slug){
+		
+		
 		$http.get(
-			'https://api.cartolafc.globo.com/atletas/pontuados',
+			'https://api.cartolafc.globo.com/time/'+time_slug,
 			{
 				  headers:{
 					  'X-GLB-Token': $localStorage.token
@@ -66,20 +129,22 @@ app.controller('homeController', function ($scope,$http, $localStorage, _) {
 			}
 
 		).then(function(response){
-			console.log(response.data.atletas);
+			//console.log(response.data.atletas);
+			$scope.times_home.push(response.data);
 			
-			$scope.atletas=response.data.atletas;
-			$scope.clubes=response.data.clubes;
-			$scope.posicoes=response.data.posicoes;
-		});
+			
+		},function(response){
+			console.log('Deu ao acessar o time '+time_slug);
+			console.log(response);
+		});		
 		
-
+		return data_time;
 	};
 	
 	
 	//$scope.times_selecionados=$localStorage.times_selecionados;
 	_.each($localStorage.times_selecionados,function(time_slug){
-		
+		console.log($scope.getTime(time_slug) )
 		
 	})
 	
