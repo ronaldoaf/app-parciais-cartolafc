@@ -22,6 +22,36 @@ $routeProvider.
 	
 }]);
 
+
+
+//https://api.cartolafc.globo.com/auth/liga/prodesp-coaching-smart
+app.controller('mainController', function ($routeParams,$rootScope,$scope,$http,$localStorage,$routeParams, _ ) {
+	$localStorage.times_selecionados= $localStorage.times_selecionados || [];
+	
+	
+
+});
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 app.controller('homeController', function ($scope,$http, $localStorage, _) {
 	$localStorage.times_selecionados= $localStorage.times_selecionados || [];
 	
@@ -89,7 +119,7 @@ app.controller('ligasController', function ($scope,$http,$localStorage) {
 //https://api.cartolafc.globo.com/auth/liga/prodesp-coaching-smart
 app.controller('times_ligaController', function ($routeParams,$rootScope,$scope,$http,$localStorage,$routeParams, _ ) {
 
-		$localStorage.times_selecionados= $localStorage.times_selecionados || [];
+		
 		$scope.times_selecionados={};
 		_.each($localStorage.times_selecionados, function(time){
 			$scope.times_selecionados[time]=true;		
